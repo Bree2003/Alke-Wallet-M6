@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ContactRepository extends JpaRepository<ContactEntity, Long> {
 
-    @Query("SELECT c FROM ContactEntity c WHERE u.username = :username")
+    @Query("SELECT c FROM ContactEntity c WHERE c.username = :username")
     Optional<ContactEntity> findUserByUsername(String username);
 }

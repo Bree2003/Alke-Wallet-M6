@@ -27,5 +27,5 @@ public class TransactionEntity {
     private UserEntity user;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contact_id", nullable = false)
-    private ContactEntity contact;
+    private UserEntity contact;
 }
