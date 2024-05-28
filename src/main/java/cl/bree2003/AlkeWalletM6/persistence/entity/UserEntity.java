@@ -3,6 +3,9 @@ package cl.bree2003.AlkeWalletM6.persistence.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,5 +25,9 @@ public class UserEntity {
     private String pass;
     @Column(columnDefinition = "DECIMAL(10,2)")
     private Double balance;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ContactEntity> contacts = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TransactionEntity> transactions = new ArrayList<>();
 
 }
