@@ -8,8 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class ValidationsConfig {
 
     @Bean
-    public UserValidation userValidation(){
+    public UserValidation userValidation() {
         return new UserValidation();
     }
-
 }

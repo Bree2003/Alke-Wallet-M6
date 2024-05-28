@@ -16,18 +16,18 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthRestController {
+public class AuthController {
 
     @Autowired
     IAuthService authService;
 
     @PostMapping("/register")
-    private ResponseEntity<ResponseDTO> registerUser(@RequestBody UserEntity user) throws Exception {
+    private ResponseEntity<ResponseDTO> regiter(@RequestBody UserEntity user) throws Exception {
         return new ResponseEntity<>(authService.register(user), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    private ResponseEntity<HashMap<String, String>> loginUser(@RequestBody LoginDTO loginDTO) throws Exception {
+    private ResponseEntity<HashMap<String, String>> login(@RequestBody LoginDTO loginDTO) throws Exception {
         HashMap<String, String> login = authService.login(loginDTO);
 
         if(login.containsKey("jwt")) {
@@ -36,5 +36,4 @@ public class AuthRestController {
             return new ResponseEntity<>(login, HttpStatus.UNAUTHORIZED);
         }
     }
-
 }

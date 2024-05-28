@@ -1,5 +1,6 @@
 package cl.bree2003.AlkeWalletM6.security;
 
+
 import cl.bree2003.AlkeWalletM6.service.IJWTUtilityService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,8 @@ public class SecurityConfig {
                 .exceptionHandling(exception ->
                         exception
                                 .authenticationEntryPoint((request, response, authException) -> {
-                                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-                                }))
+                                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+                                        }))
                 .build();
     }
 
@@ -46,5 +47,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
 }

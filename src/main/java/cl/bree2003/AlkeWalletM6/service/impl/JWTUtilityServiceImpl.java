@@ -101,5 +101,4 @@ public class JWTUtilityServiceImpl implements IJWTUtilityService {
 
         return keyFactory.generatePublic(new X509EncodedKeySpec(decodedKey));
     }
-
 }

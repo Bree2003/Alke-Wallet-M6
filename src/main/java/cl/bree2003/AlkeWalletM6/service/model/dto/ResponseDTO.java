@@ -9,5 +9,4 @@ public class ResponseDTO {
 
     private int numOfErrors;
     private String message;
-
 }
