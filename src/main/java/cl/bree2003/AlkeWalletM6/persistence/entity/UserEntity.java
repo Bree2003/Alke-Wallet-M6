@@ -1,5 +1,6 @@
 package cl.bree2003.AlkeWalletM6.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,8 +27,10 @@ public class UserEntity {
     @Column(columnDefinition = "DECIMAL(10,2)")
     private Double balance;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<ContactEntity> contacts = new ArrayList<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<TransactionEntity> transactions = new ArrayList<>();
 
 }

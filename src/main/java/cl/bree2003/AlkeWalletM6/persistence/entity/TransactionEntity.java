@@ -1,10 +1,14 @@
 package cl.bree2003.AlkeWalletM6.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Immutable;
 
 @Getter
 @Setter
@@ -12,6 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "transactions")
+@Immutable
 public class TransactionEntity {
 
     @Id
@@ -23,9 +28,8 @@ public class TransactionEntity {
     @Column(columnDefinition = "DECIMAL(10,2)")
     private Double total;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "sender_id", nullable = false)
+    @JsonBackReference
     private UserEntity user;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contact_id", nullable = false)
-    private UserEntity contact;
+    private String emailReceiver;
 }
