@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class UserServiceImpl implements IUserService {
 
@@ -21,8 +22,30 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void createUser(UserEntity user) {
+    public void createUser(UserEntity user){
         userRepository.save(user);
+    }
+
+    @Override
+    public void updateUser(UserEntity user, Long id) {
+        Optional<UserEntity> optionalUser = findUserById(id);
+        if(optionalUser.isPresent()){
+            UserEntity existingUser = optionalUser.get();
+            existingUser.setName(user.getName());
+            existingUser.setUsername(user.getUsername());
+            existingUser.setEmail(user.getEmail());
+            existingUser.setPass(user.getPass());
+
+            userRepository.save(existingUser);
+        }
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        Optional<UserEntity> optionalUser = findUserById(id);
+        if(optionalUser.isPresent()){
+            userRepository.deleteById(id);
+        }
     }
 
     @Override
@@ -31,70 +54,17 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Optional<UserEntity> findUserByUsername(String username) {
-        return userRepository.findUserByUsername(username);
-    }
-
-    @Override
-    public Optional<UserEntity> findUserByEmail(String email){
-        return userRepository.findUserByEmail(email);
-    }
-
-    @Override
-    public void updateUser(UserEntity user, Long id) {
-        Optional<UserEntity> optionalUser = findUserById(id);
-        if(optionalUser.isPresent()) {
-            UserEntity updateUser = optionalUser.get();
-            updateUser.setName(user.getName());
-            updateUser.setUsername(user.getUsername());
-            updateUser.setEmail(user.getEmail());
-            updateUser.setPass(user.getPass());
-
-            userRepository.save(updateUser);
-        }
-    }
-
-    @Override
-    public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
-    }
-
-    @Override
     public List<UserEntity> findAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public void depositMoney(Double amount, Long id) {
-        Optional<UserEntity> optionalUser = findUserById(id);
-        if(optionalUser.isPresent()) {
-            UserEntity updateUser = optionalUser.get();
-            Double total = updateUser.getBalance() + amount;
-            updateUser.setBalance(total);
-
-            userRepository.save(updateUser);
-        }
+    public Optional<UserEntity> findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
     }
 
     @Override
-    public void withdrawMoney(Double amount, Long id) {
-        Optional<UserEntity> optionalUser = findUserById(id);
-        if(optionalUser.isPresent()) {
-            UserEntity updateUser = optionalUser.get();
-
-            if(amount <= updateUser.getBalance()){
-                Double total = updateUser.getBalance() - amount;
-                updateUser.setBalance(total);
-
-                userRepository.save(updateUser);
-            } else {
-                System.out.println("The amount is greater than the balance");
-            }
-        }
-    }
-
-    @Override
-    public void transferMoney(Double amount, Long userId, Long contactId) {
-
+    public Optional<UserEntity> findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
     }
 }
