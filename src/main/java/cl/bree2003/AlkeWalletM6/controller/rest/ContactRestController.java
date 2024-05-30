@@ -53,9 +53,9 @@ public class ContactRestController {
         }
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<List<ContactEntity>> getContactsByUserId(@PathVariable Long id){
-        List<ContactEntity> contactsByUser = contactService.findAllContactsByUserId(id);
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<ContactEntity>> getContactsByUserId(@PathVariable Long userId){
+        List<ContactEntity> contactsByUser = contactService.findAllContactsByUserId(userId);
         return new ResponseEntity<>(contactsByUser, HttpStatus.OK);
     }
 
@@ -73,7 +73,7 @@ public class ContactRestController {
 
     @GetMapping("/checkDuplicateContact/{id}")
     public ResponseEntity<Boolean> checkDuplicateContact(@PathVariable Long id, @RequestParam String email){
-        Optional<ContactEntity> optionalContact = contactService.findContactByEmailByUser(email, id);
+        Optional<ContactEntity> optionalContact = contactService.findContactByEmailByUserId(email, id);
         return new ResponseEntity<>(optionalContact.isPresent(), HttpStatus.OK);
     }
 

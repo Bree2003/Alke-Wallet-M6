@@ -67,28 +67,28 @@ public class TransactionServiceImpl implements ITransactionService {
     }
 
     @Override
-    public List<TransactionEntity> findAllTransactionsByUser(UserEntity user) {
-        return transactionRepository.findAllTransactionsByUser(user);
+    public List<TransactionEntity> findAllTransactionsByUserId(Long userId) {
+        return transactionRepository.findAllTransactionsByUserId(userId);
     }
 
     @Override
-    public List<TransactionEntity> findAllWithdrawTransactionsByUser(UserEntity user) {
-        return transactionRepository.findAllWithdrawTransactionsByUser(user);
+    public List<TransactionEntity> findAllWithdrawTransactionsByUserId(Long userId) {
+        return transactionRepository.findAllWithdrawTransactionsByUserId(userId);
     }
 
     @Override
-    public List<TransactionEntity> findAllDepositTransactionsByUser(UserEntity user) {
-        return transactionRepository.findAllDepositTransactionsByUser(user);
+    public List<TransactionEntity> findAllDepositTransactionsByUserId(Long userId) {
+        return transactionRepository.findAllDepositTransactionsByUserId(userId);
     }
 
     @Override
-    public List<TransactionEntity> findAllTransferTransactionsByUser(UserEntity user) {
-        return transactionRepository.findAllTransferTransactionsByUser(user);
+    public List<TransactionEntity> findAllTransferTransactionsByUserId(Long userId) {
+        return transactionRepository.findAllTransferTransactionsByUserId(userId);
     }
 
     @Override
-    public Optional<UserEntity> findUserById(Long id) {
-        return transactionRepository.findUserById(id);
+    public Optional<TransactionEntity> findTransactionById(Long id) {
+        return transactionRepository.findById(id);
     }
 
     @Override

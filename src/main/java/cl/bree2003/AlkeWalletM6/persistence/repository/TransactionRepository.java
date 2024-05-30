@@ -13,16 +13,16 @@ import java.util.Optional;
 @Repository
 public interface TransactionRepository extends JpaRepository<TransactionEntity, Long> {
 
-    @Query("SELECT t FROM TransactionEntity t WHERE t.user = :user")
-    List<TransactionEntity> findAllTransactionsByUser(UserEntity user);
+    @Query("SELECT t FROM TransactionEntity t WHERE t.user.id = :userId")
+    List<TransactionEntity> findAllTransactionsByUserId(Long userId);
     @Query("SELECT u FROM UserEntity u WHERE u.email = :email")
     Optional<UserEntity> findUserByEmail(String email);
-    @Query("SELECT t FROM TransactionEntity t WHERE t.user = :user AND t.type = 'WITHDRAW'")
-    List<TransactionEntity> findAllWithdrawTransactionsByUser(UserEntity user);
-    @Query("SELECT t FROM TransactionEntity t WHERE t.user = :user AND t.type = 'DEPOSIT'")
-    List<TransactionEntity> findAllDepositTransactionsByUser(UserEntity user);
-    @Query("SELECT t FROM TransactionEntity t WHERE t.user = :user AND t.type = 'TRANSFER'")
-    List<TransactionEntity> findAllTransferTransactionsByUser(UserEntity user);
+    @Query("SELECT t FROM TransactionEntity t WHERE t.user.id = :userId AND t.type = 'WITHDRAW'")
+    List<TransactionEntity> findAllWithdrawTransactionsByUserId(Long userId);
+    @Query("SELECT t FROM TransactionEntity t WHERE t.user.id = :userId AND t.type = 'DEPOSIT'")
+    List<TransactionEntity> findAllDepositTransactionsByUserId(Long userId);
+    @Query("SELECT t FROM TransactionEntity t WHERE t.user.id = :userId AND t.type = 'TRANSFER'")
+    List<TransactionEntity> findAllTransferTransactionsByUserId(Long userId);
     @Query("SELECT u FROM UserEntity u WHERE u.id = :id")
     Optional<UserEntity> findUserById(Long id);
 

@@ -11,10 +11,10 @@ public interface ITransactionService {
     void createTransaction(TransactionEntity transaction);
     void deleteTransaction(Long id);
     List<TransactionEntity> findAllTransactions();
-    List<TransactionEntity> findAllTransactionsByUser(UserEntity user);
-    List<TransactionEntity> findAllWithdrawTransactionsByUser(UserEntity user);
-    List<TransactionEntity> findAllDepositTransactionsByUser(UserEntity user);
-    List<TransactionEntity> findAllTransferTransactionsByUser(UserEntity user);
-    Optional<UserEntity> findUserById(Long id);
+    List<TransactionEntity> findAllTransactionsByUserId(Long userId);
+    List<TransactionEntity> findAllWithdrawTransactionsByUserId(Long userId);
+    List<TransactionEntity> findAllDepositTransactionsByUserId(Long userId);
+    List<TransactionEntity> findAllTransferTransactionsByUserId(Long userId);
+    Optional<TransactionEntity> findTransactionById(Long id);
     Optional<UserEntity> findUserByEmail(String email);
 }

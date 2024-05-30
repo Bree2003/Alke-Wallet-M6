@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/rest/transactions")
@@ -27,37 +28,50 @@ public class TransactionRestController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteTransaction(@PathVariable Long id){
+        Optional<TransactionEntity> optionalTransaction = transactionService.findTransactionById(id);
+        if(optionalTransaction.isPresent()){
+            transactionService.deleteTransaction(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<TransactionEntity> findTransactionById(@PathVariable Long id){
+        Optional<TransactionEntity> optionalTransaction = transactionService.findTransactionById(id);
+        return optionalTransaction.map(transaction -> new ResponseEntity<>(transaction, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<TransactionEntity>> getAllTransactions(){
         List<TransactionEntity> transactions = transactionService.findAllTransactions();
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<List<TransactionEntity>> getAllTransactionsByUser(@PathVariable Long id){
-        UserEntity user = transactionService.findUserById(id).get();
-        List<TransactionEntity> transactions = transactionService.findAllTransactionsByUser(user);
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<TransactionEntity>> getAllTransactionsByUserId(@PathVariable Long userId){
+        List<TransactionEntity> transactions = transactionService.findAllTransactionsByUserId(userId);
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
 
-    @GetMapping("/user/{id}/deposit")
-    public ResponseEntity<List<TransactionEntity>> getAllDepositTransactionsByUser(@PathVariable Long id){
-        UserEntity user = transactionService.findUserById(id).get();
-        List<TransactionEntity> transactions = transactionService.findAllDepositTransactionsByUser(user);
+    @GetMapping("/user/{userId}/deposit")
+    public ResponseEntity<List<TransactionEntity>> getAllDepositTransactionsByUserId(@PathVariable Long userId){
+        List<TransactionEntity> transactions = transactionService.findAllDepositTransactionsByUserId(userId);
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
 
-    @GetMapping("/user/{id}/withdraw")
-    public ResponseEntity<List<TransactionEntity>> getAllWithdrawTransactionsByUser(@PathVariable Long id){
-        UserEntity user = transactionService.findUserById(id).get();
-        List<TransactionEntity> transactions = transactionService.findAllWithdrawTransactionsByUser(user);
+    @GetMapping("/user/{userId}/withdraw")
+    public ResponseEntity<List<TransactionEntity>> getAllWithdrawTransactionsByUserId(@PathVariable Long userId){
+        List<TransactionEntity> transactions = transactionService.findAllWithdrawTransactionsByUserId(userId);
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
 
-    @GetMapping("/user/{id}/transfer")
-    public ResponseEntity<List<TransactionEntity>> getAllTransferTransactionsByUser(@PathVariable Long id){
-        UserEntity user = transactionService.findUserById(id).get();
-        List<TransactionEntity> transactions = transactionService.findAllTransferTransactionsByUser(user);
+    @GetMapping("/user/{userId}/transfer")
+    public ResponseEntity<List<TransactionEntity>> getAllTransferTransactionsByUserId(@PathVariable Long userId){
+        List<TransactionEntity> transactions = transactionService.findAllTransferTransactionsByUserId(userId);
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
 

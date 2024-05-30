@@ -7,7 +7,6 @@ import cl.bree2003.AlkeWalletM6.service.IContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,11 +43,6 @@ public class ContactServiceImpl implements IContactService {
     }
 
     @Override
-    public Optional<UserEntity> findUserById(Long id) {
-        return contactRepository.findUserById(id);
-    }
-
-    @Override
     public Optional<UserEntity> findUserByEmail(String email) {
         return contactRepository.findUserByEmail(email);
     }
@@ -64,14 +58,12 @@ public class ContactServiceImpl implements IContactService {
     }
 
     @Override
-    public List<ContactEntity> findAllContactsByUserId(Long id) {
-        UserEntity existingUser = findUserById(id).get();
-        return contactRepository.findAllContactsByUser(existingUser);
+    public List<ContactEntity> findAllContactsByUserId(Long userId) {
+        return contactRepository.findAllContactsByUserId(userId);
     }
 
     @Override
-    public Optional<ContactEntity> findContactByEmailByUser(String email, Long id) {
-        Optional<UserEntity> optionalUser = findUserById(id);
-        return contactRepository.findContactByEmailByUser(optionalUser.get(), email);
+    public Optional<ContactEntity> findContactByEmailByUserId(String email, Long userId) {
+        return contactRepository.findContactByEmailByUserId(email, userId);
     }
 }
