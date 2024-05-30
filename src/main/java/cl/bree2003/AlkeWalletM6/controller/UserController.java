@@ -81,7 +81,9 @@ public class UserController {
         }
 
         UserEntity user = optionalUser.get();
+        int count = user.getContacts().size();
         model.addAttribute("user", user);
+        model.addAttribute("contactCount", count);
         return "home";
     }
 

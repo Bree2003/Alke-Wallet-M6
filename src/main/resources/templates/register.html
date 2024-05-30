@@ -31,7 +31,7 @@
                 <input type="password" class="form-control" id="pass" name="pass" th:field="*{pass}"
                     placeholder="Enter your password">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Create Account</button>
             <div th:if="${errors}" class="alert alert-danger" th:text="${errors}"></div>
         </form>
         <a th:href="@{/api/users/login}">Already have an account? Login</a>

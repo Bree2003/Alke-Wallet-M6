@@ -13,6 +13,7 @@ public interface IContactService {
     Optional<ContactEntity> findContactById(Long id);
     Optional<UserEntity> findUserByEmail(String email);
     List<ContactEntity> findAllContacts();
+    Optional<UserEntity> findUserById(Long id);
     void deleteContactById(Long id);
     List<ContactEntity> findAllContactsByUserId(Long userId);
     Optional<ContactEntity> findContactByEmailByUserId(String email, Long userId);

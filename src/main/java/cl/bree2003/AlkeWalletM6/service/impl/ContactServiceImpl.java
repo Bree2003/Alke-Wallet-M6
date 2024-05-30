@@ -53,6 +53,11 @@ public class ContactServiceImpl implements IContactService {
     }
 
     @Override
+    public Optional<UserEntity> findUserById(Long id) {
+        return contactRepository.findUserById(id);
+    }
+
+    @Override
     public void deleteContactById(Long id) {
         contactRepository.deleteById(id);
     }
