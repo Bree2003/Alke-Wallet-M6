@@ -18,7 +18,7 @@ import java.util.Optional;
 public class UserRestController {
 
     @Autowired
-    IUserService userService;
+    private IUserService userService;
 
     @Autowired
     private UserValidation userValidation;

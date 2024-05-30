@@ -1,7 +1,6 @@
 package cl.bree2003.AlkeWalletM6.controller.rest;
 
 import cl.bree2003.AlkeWalletM6.persistence.entity.TransactionEntity;
-import cl.bree2003.AlkeWalletM6.persistence.entity.UserEntity;
 import cl.bree2003.AlkeWalletM6.service.ITransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
