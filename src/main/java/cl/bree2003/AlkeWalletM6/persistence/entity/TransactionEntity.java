@@ -23,6 +23,7 @@ public class TransactionEntity {
     private String message;
     @Enumerated(EnumType.STRING)
     private TransactionEnum type;
+    private String emailSender;
     private String emailReceiver;
     @Column(columnDefinition = "DECIMAL(10,2)")
     private Double total;
