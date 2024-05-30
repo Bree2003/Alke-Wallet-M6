@@ -23,11 +23,11 @@ public class TransactionEntity {
     private String message;
     @Enumerated(EnumType.STRING)
     private TransactionEnum type;
+    private String emailReceiver;
     @Column(columnDefinition = "DECIMAL(10,2)")
     private Double total;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id", nullable = false)
     @JsonBackReference
     private UserEntity user;
-    private String emailReceiver;
 }

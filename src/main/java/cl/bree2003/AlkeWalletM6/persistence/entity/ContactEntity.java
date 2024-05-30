@@ -20,12 +20,9 @@ public class ContactEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
+    private String email;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private UserEntity user;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contact_id", nullable = false)
-    @JsonIgnore
-    private UserEntity contact;
 }

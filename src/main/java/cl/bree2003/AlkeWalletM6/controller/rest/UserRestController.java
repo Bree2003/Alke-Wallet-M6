@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("/rest/users")
 public class UserRestController {
 
     @Autowired
@@ -56,11 +56,15 @@ public class UserRestController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<UserEntity> updateUser(@RequestBody UserEntity user, @PathVariable Long id){
+    public ResponseEntity<ResponseDTO> updateUser(@RequestBody UserEntity user, @PathVariable Long id){
         Optional<UserEntity> optionalUser = userService.findUserById(id);
         if(optionalUser.isPresent()){
+        ResponseDTO validationResponse = userValidation.validate(user);
+            if(validationResponse.getNumOfErrors() > 0){
+                return new ResponseEntity<>(validationResponse, HttpStatus.BAD_REQUEST);
+            }
             userService.updateUser(user, id);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            return new ResponseEntity<>(validationResponse, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -83,19 +87,19 @@ public class UserRestController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Optional<UserEntity>> findUserById(@PathVariable Long id){
         Optional<UserEntity> optionalUser = userService.findUserById(id);
         return optionalUser.isPresent() ? new ResponseEntity<>(optionalUser, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/username/{username}")
     public ResponseEntity<Optional<UserEntity>> findUserByUsername(@PathVariable String username){
         Optional<UserEntity> optionalUser = userService.findUserByUsername(username);
         return optionalUser.isPresent() ? new ResponseEntity<>(optionalUser, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<Optional<UserEntity>> findUserByEmail(@PathVariable String email){
         Optional<UserEntity> optionalUser = userService.findUserByEmail(email);
         return optionalUser.isPresent() ? new ResponseEntity<>(optionalUser, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
