@@ -88,20 +88,20 @@ public class UserRestController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Optional<UserEntity>> findUserById(@PathVariable Long id){
+    public ResponseEntity<UserEntity> findUserById(@PathVariable Long id){
         Optional<UserEntity> optionalUser = userService.findUserById(id);
-        return optionalUser.isPresent() ? new ResponseEntity<>(optionalUser, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return optionalUser.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/username/{username}")
-    public ResponseEntity<Optional<UserEntity>> findUserByUsername(@PathVariable String username){
+    public ResponseEntity<UserEntity> findUserByUsername(@PathVariable String username){
         Optional<UserEntity> optionalUser = userService.findUserByUsername(username);
-        return optionalUser.isPresent() ? new ResponseEntity<>(optionalUser, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return optionalUser.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<Optional<UserEntity>> findUserByEmail(@PathVariable String email){
+    public ResponseEntity<UserEntity> findUserByEmail(@PathVariable String email){
         Optional<UserEntity> optionalUser = userService.findUserByEmail(email);
-        return optionalUser.isPresent() ? new ResponseEntity<>(optionalUser, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return optionalUser.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
