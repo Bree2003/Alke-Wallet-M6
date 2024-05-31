@@ -17,5 +17,6 @@ public interface IContactService {
     void deleteContactById(Long id);
     List<ContactEntity> findAllContactsByUserId(Long userId);
     Optional<ContactEntity> findContactByEmailByUserId(String email, Long userId);
+    Optional<ContactEntity> findContactByUsernameByUserId(String username, Long userId);
 
 }

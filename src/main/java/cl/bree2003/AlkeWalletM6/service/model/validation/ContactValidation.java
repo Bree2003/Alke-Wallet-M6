@@ -6,6 +6,7 @@ import cl.bree2003.AlkeWalletM6.service.IContactService;
 import cl.bree2003.AlkeWalletM6.service.model.dto.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Optional;
 
 public class ContactValidation {
@@ -32,6 +33,13 @@ public class ContactValidation {
             if(existingContact.isPresent()){
                 responseDTO.setNumOfErrors(responseDTO.getNumOfErrors() + 1);
                 responseDTO.setMessage("Contact already exists.");
+            }
+
+            // Check if the contact's username already exists
+            Optional<ContactEntity> existContactByUsernameByUser = contactService.findContactByUsernameByUserId(contact.getUsername(), contact.getUser().getId());
+            if(existContactByUsernameByUser.isPresent()){
+                responseDTO.setNumOfErrors(responseDTO.getNumOfErrors() + 1);
+                responseDTO.setMessage("Username already declare to a contact, choose another.");
             }
         }
 

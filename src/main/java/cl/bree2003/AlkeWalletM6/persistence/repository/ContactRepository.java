@@ -20,4 +20,6 @@ public interface ContactRepository extends JpaRepository<ContactEntity, Long> {
     List<ContactEntity> findAllContactsByUserId(Long userId);
     @Query("SELECT c FROM ContactEntity c WHERE c.email = :email AND c.user.id = :userId")
     Optional<ContactEntity> findContactByEmailByUserId(String email, Long userId);
+    @Query("SELECT c FROM ContactEntity c WHERE c.username = :username AND c.user.id = :userId")
+    Optional<ContactEntity> findContactByUsernameByUserId(String username, Long userId);
 }

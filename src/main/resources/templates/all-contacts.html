@@ -24,6 +24,8 @@
                     <th scope="row" th:text="${iterStat.index + 1}">1</th>
                     <td th:text="${contact.username}"></td>
                     <td th:text="${contact.email}"></td>
+                    <td><a th:href="@{/api/contacts/delete/{id}(id=${contact.id})}"
+                            class="btn btn-danger btn-sm">Delete</a></td>
                 </tr>
             </tbody>
         </table>

@@ -71,4 +71,9 @@ public class ContactServiceImpl implements IContactService {
     public Optional<ContactEntity> findContactByEmailByUserId(String email, Long userId) {
         return contactRepository.findContactByEmailByUserId(email, userId);
     }
+
+    @Override
+    public Optional<ContactEntity> findContactByUsernameByUserId(String username, Long userId) {
+        return contactRepository.findContactByUsernameByUserId(username, userId);
+    }
 }
