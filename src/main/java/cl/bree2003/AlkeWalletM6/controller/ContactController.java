@@ -24,8 +24,13 @@ public class ContactController {
     private ContactValidation contactValidation;
 
     @GetMapping("/create")
-    public String showCreateContactForm(Model model){
+    public String showCreateContactForm(Model model, HttpSession session){
         model.addAttribute("contact", new ContactEntity());
+        Long userId = (Long) session.getAttribute("userId");
+
+        if(userId == null){
+            return "redirect:/api/users/login";
+        }
         return "create-contact";
     }
 
@@ -46,6 +51,10 @@ public class ContactController {
     @GetMapping("/all-your-contacts")
     public String showAllContactsByUser(Model model, HttpSession session){
         Long userId = (Long) session.getAttribute("userId");
+
+        if(userId == null){
+            return "redirect:/api/users/login";
+        }
         List<ContactEntity> contacts = contactService.findAllContactsByUserId(userId);
         model.addAttribute("contacts", contacts);
 

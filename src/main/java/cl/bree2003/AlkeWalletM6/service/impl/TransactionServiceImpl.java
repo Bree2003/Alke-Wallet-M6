@@ -26,6 +26,7 @@ public class TransactionServiceImpl implements ITransactionService {
     public void createTransaction(TransactionEntity transaction) {
         UserEntity sender = findUserByEmail(transaction.getEmailSender()).get();
         UserEntity receiver = findUserByEmail(transaction.getEmailReceiver()).get();
+
         switch (transaction.getType()){
             case DEPOSIT -> {
                 sender.setBalance(sender.getBalance() + transaction.getTotal());
@@ -38,7 +39,6 @@ public class TransactionServiceImpl implements ITransactionService {
                 transactionRepository.save(transaction);
             }
             case TRANSFER -> {
-
                 sender.setBalance(sender.getBalance() - transaction.getTotal());
                 transaction.setUser(sender);
                 transactionRepository.save(transaction);
@@ -94,6 +94,11 @@ public class TransactionServiceImpl implements ITransactionService {
     @Override
     public Optional<UserEntity> findUserByEmail(String email) {
         return transactionRepository.findUserByEmail(email);
+    }
+
+    @Override
+    public Optional<UserEntity> findUserById(Long id) {
+        return transactionRepository.findUserById(id);
     }
 
 }

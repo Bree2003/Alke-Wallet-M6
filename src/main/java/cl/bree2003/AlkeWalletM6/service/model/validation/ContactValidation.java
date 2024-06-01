@@ -6,7 +6,6 @@ import cl.bree2003.AlkeWalletM6.service.IContactService;
 import cl.bree2003.AlkeWalletM6.service.model.dto.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 import java.util.Optional;
 
 public class ContactValidation {
@@ -16,6 +15,8 @@ public class ContactValidation {
 
     public ResponseDTO validate(ContactEntity contact){
         ResponseDTO responseDTO = new ResponseDTO();
+
+        responseDTO.setNumOfErrors(0);
 
         Optional<UserEntity> existingUser = contactService.findUserByEmail(contact.getEmail());
         if(existingUser.isEmpty()){

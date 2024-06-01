@@ -17,4 +17,5 @@ public interface ITransactionService {
     List<TransactionEntity> findAllTransferTransactionsByUserId(Long userId);
     Optional<TransactionEntity> findTransactionById(Long id);
     Optional<UserEntity> findUserByEmail(String email);
+    Optional<UserEntity> findUserById(Long id);
 }

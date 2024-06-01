@@ -6,7 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Immutable;
+
+import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
@@ -27,8 +31,24 @@ public class TransactionEntity {
     private String emailReceiver;
     @Column(columnDefinition = "DECIMAL(10,2)")
     private Double total;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id", nullable = false)
     @JsonBackReference
     private UserEntity user;
+
+    @Override
+    public String toString() {
+        return "TransactionEntity{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", type=" + type +
+                ", emailSender='" + emailSender + '\'' +
+                ", emailReceiver='" + emailReceiver + '\'' +
+                ", total=" + total +
+                ", createdAt=" + createdAt +
+                ", user=" + user +
+                '}';
+    }
 }

@@ -24,33 +24,33 @@ VALUES
     ('user4_contact1', 4, 'john@example.com');
 
 -- Additional transactions for user 1 (John Doe)
-INSERT INTO transactions (message, type, email_sender, email_receiver, total, sender_id)
+INSERT INTO transactions (message, type, email_sender, email_receiver, total, sender_id, created_at)
 VALUES
-    ('Bill payment', 'WITHDRAW', 'john@example.com', 'john@example.com', 120.00, 1),
-    ('Online purchase', 'WITHDRAW', 'john@example.com', 'john@example.com', 80.00, 1),
-    ('Phone recharge', 'WITHDRAW', 'john@example.com', 'john@example.com', 30.00, 1),
-    ('ATM withdrawal', 'WITHDRAW', 'john@example.com', 'john@example.com', 50.00, 1);
+    ('Bill payment', 'WITHDRAW', 'john@example.com', 'john@example.com', 120.00, 1, NOW()),
+    ('Online purchase', 'WITHDRAW', 'john@example.com', 'john@example.com', 80.00, 1, NOW()),
+    ('Phone recharge', 'WITHDRAW', 'john@example.com', 'john@example.com', 30.00, 1, NOW()),
+    ('ATM withdrawal', 'WITHDRAW', 'john@example.com', 'john@example.com', 50.00, 1, NOW());
 
 -- Additional transactions for user 2 (Alice Smith)
-INSERT INTO transactions (message, type, email_sender, email_receiver, total, sender_id)
+INSERT INTO transactions (message, type, email_sender, email_receiver, total, sender_id, created_at)
 VALUES
-    ('Rebate deposit', 'DEPOSIT', 'alice@example.com', 'alice@example.com', 200.00, 2),
-    ('Rent payment', 'WITHDRAW', 'alice@example.com', 'alice@example.com', 400.00, 2),
-    ('Supermarket purchase', 'WITHDRAW', 'alice@example.com', 'alice@example.com', 150.00, 2),
-    ('Loan payment', 'WITHDRAW', 'alice@example.com', 'alice@example.com', 100.00, 2);
+    ('Rebate deposit', 'DEPOSIT', 'alice@example.com', 'alice@example.com', 200.00, 2, NOW()),
+    ('Rent payment', 'WITHDRAW', 'alice@example.com', 'alice@example.com', 400.00, 2, NOW()),
+    ('Supermarket purchase', 'WITHDRAW', 'alice@example.com', 'alice@example.com', 150.00, 2, NOW()),
+    ('Loan payment', 'WITHDRAW', 'alice@example.com', 'alice@example.com', 100.00, 2, NOW());
 
 -- Additional transactions for user 3 (Bob Johnson)
-INSERT INTO transactions (message, type, email_sender, email_receiver, total, sender_id)
+INSERT INTO transactions (message, type, email_sender, email_receiver, total, sender_id, created_at)
 VALUES
-    ('Ticket purchase', 'WITHDRAW', 'bob@example.com', 'bob@example.com', 120.00, 3),
-    ('Bonus deposit', 'DEPOSIT', 'bob@example.com', 'bob@example.com', 50.00, 3),
-    ('Membership payment', 'WITHDRAW', 'bob@example.com', 'bob@example.com', 80.00, 3),
-    ('Subscription payment', 'WITHDRAW', 'bob@example.com', 'bob@example.com', 30.00, 3);
+    ('Ticket purchase', 'WITHDRAW', 'bob@example.com', 'bob@example.com', 120.00, 3, NOW()),
+    ('Bonus deposit', 'DEPOSIT', 'bob@example.com', 'bob@example.com', 50.00, 3, NOW()),
+    ('Membership payment', 'WITHDRAW', 'bob@example.com', 'bob@example.com', 80.00, 3, NOW()),
+    ('Subscription payment', 'WITHDRAW', 'bob@example.com', 'bob@example.com', 30.00, 3, NOW());
 
 -- Additional transactions for user 4 (Charlie Brown)
-INSERT INTO transactions (message, type, email_sender, email_receiver, total, sender_id)
+INSERT INTO transactions (message, type, email_sender, email_receiver, total, sender_id, created_at)
 VALUES
-    ('Water bill payment', 'WITHDRAW', 'charlie@example.com', 'charlie@example.com', 50.00, 4),
-    ('Electronics purchase', 'WITHDRAW', 'charlie@example.com', 'charlie@example.com', 300.00, 4),
-    ('Savings deposit', 'DEPOSIT', 'charlie@example.com', 'charlie@example.com', 100.00, 4),
-    ('Pet store purchase', 'WITHDRAW', 'charlie@example.com', 'charlie@example.com', 70.00, 4);
+    ('Water bill payment', 'WITHDRAW', 'charlie@example.com', 'charlie@example.com', 50.00, 4, NOW()),
+    ('Electronics purchase', 'WITHDRAW', 'charlie@example.com', 'charlie@example.com', 300.00, 4, NOW()),
+    ('Savings deposit', 'DEPOSIT', 'charlie@example.com', 'charlie@example.com', 100.00, 4, NOW()),
+    ('Pet store purchase', 'WITHDRAW', 'charlie@example.com', 'charlie@example.com', 70.00, 4, NOW());
