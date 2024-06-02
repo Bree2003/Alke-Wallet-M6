@@ -7,6 +7,7 @@ import cl.bree2003.AlkeWalletM6.service.model.dto.ResponseDTO;
 import cl.bree2003.AlkeWalletM6.service.model.validation.UserValidation;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,7 +51,7 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public String loginUser(@ModelAttribute("loginDTO") LoginDTO loginDTO, Model model, HttpSession session){
         Optional<UserEntity> optionalUser = userService.findUserByUsername(loginDTO.getUsername());
         if(optionalUser.isEmpty()){
@@ -58,7 +59,8 @@ public class UserController {
             return "login";
         }
 
-        if(!optionalUser.get().getPass().equals(loginDTO.getPass())) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if(!encoder.matches(loginDTO.getPass(), optionalUser.get().getPass())){
             model.addAttribute("error", "Invalid password");
             return "login";
         }

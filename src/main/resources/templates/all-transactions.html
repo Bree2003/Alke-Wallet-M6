@@ -14,7 +14,8 @@
         <a th:href="@{/api/transactions/withdraw}" class="btn btn-primary">Withdraw</a>
         <a th:href="@{/api/transactions/transfer}" class="btn btn-primary">Transfer</a>
         <div th:if="${#lists.isEmpty(transactions)}">
-            <p>You don't have any transactions, how about you create your first one.</p>
+            <p>You don't have any transactions, how about you create your first one. Remenber, you need at least one
+                contact to transfer.</p>
         </div>
         <div th:if="${!#lists.isEmpty(transactions)}">
             <table class="table table-striped">

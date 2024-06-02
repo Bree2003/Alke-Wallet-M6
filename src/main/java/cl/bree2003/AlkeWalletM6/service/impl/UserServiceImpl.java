@@ -5,6 +5,7 @@ import cl.bree2003.AlkeWalletM6.persistence.entity.UserEntity;
 import cl.bree2003.AlkeWalletM6.persistence.repository.UserRepository;
 import cl.bree2003.AlkeWalletM6.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void createUser(UserEntity user){
+        user.setPass(new BCryptPasswordEncoder().encode(user.getPass()));
         userRepository.save(user);
     }
 
