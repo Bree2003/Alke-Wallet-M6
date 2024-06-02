@@ -11,24 +11,30 @@
     <div class="container">
         <h2>Contacts</h2>
         <a th:href="@{/api/contacts/create}" class="btn btn-primary">Create Contact</a>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="contact, iterStat : ${contacts}">
-                    <th scope="row" th:text="${iterStat.index + 1}">1</th>
-                    <td th:text="${contact.username}"></td>
-                    <td th:text="${contact.email}"></td>
-                    <td><a th:href="@{/api/contacts/delete/{id}(id=${contact.id})}"
-                            class="btn btn-danger btn-sm">Delete</a></td>
-                </tr>
-            </tbody>
-        </table>
+        <div th:if="${#lists.isEmpty(contacts)}">
+            <p>You don't have any contact, how about you add your first one.</p>
+        </div>
+        <div th:if="${!#lists.isEmpty(contacts)}">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="contact, iterStat : ${contacts}">
+                        <th scope="row" th:text="${iterStat.index + 1}">1</th>
+                        <td th:text="${contact.username}"></td>
+                        <td th:text="${contact.email}"></td>
+                        <td><a th:href="@{/api/contacts/delete/{id}(id=${contact.id})}"
+                                class="btn btn-danger btn-sm">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <a th:href="@{/api/users/home}" class="btn btn-primary">Go to Home</a>
     </div>
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

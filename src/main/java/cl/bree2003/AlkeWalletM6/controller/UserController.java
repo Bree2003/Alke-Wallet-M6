@@ -34,7 +34,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") UserEntity user, Model model){
-        user.setBalance(5000.89);
+        user.setBalance(500.27);
         ResponseDTO validationResponse = userValidation.validate(user);
         if(validationResponse.getNumOfErrors() > 0) {
             model.addAttribute("errors", validationResponse.getMessage());

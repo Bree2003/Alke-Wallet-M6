@@ -18,11 +18,16 @@ public class TransactionValidation {
         if(transaction.getType().equals(TransactionEnum.DEPOSIT) || transaction.getType().equals(TransactionEnum.WITHDRAW)){
             transaction.setEmailReceiver(transaction.getEmailSender());
         }
-        System.out.println(transaction);
+
         if(transaction.getType().equals(TransactionEnum.TRANSFER) && transaction.getEmailReceiver().equals("")){
-            System.out.println("en null "+transaction);
+
             responseDTO.setNumOfErrors(responseDTO.getNumOfErrors() + 1);
             responseDTO.setMessage("The contacts is not valid.");
+        }
+
+        if(transaction.getTotal() < 3.00){
+            responseDTO.setNumOfErrors(responseDTO.getNumOfErrors() + 1);
+            responseDTO.setMessage("The minimum amount is $3.00.");
         }
 
         if(transaction.getType().equals(TransactionEnum.TRANSFER) || transaction.getType().equals(TransactionEnum.WITHDRAW)){

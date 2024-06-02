@@ -18,8 +18,8 @@
             </div>
             <div class="mb-3">
                 <label for="amount" class="form-label">Amount</label>
-                <input type="number" class="form-control" id="amount" name="total" th:field="*{total}"
-                    placeholder="Enter the amount" required>
+                <input type="number" class="form-control" id="amount" step="0.01" min="0" name="total"
+                    th:field="*{total}" placeholder="Enter the amount" required>
                 <input type="hidden" id="type" class="form-select" name="type" th:field="*{type}"
                     th:attr="value='TRANSFER'">
             </div>

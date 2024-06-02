@@ -18,12 +18,13 @@
             </div>
             <div class="mb-3">
                 <label for="amount" class="form-label">Amount</label>
-                <input type="number" class="form-control" id="amount" name="total" th:field="*{total}"
-                    placeholder="Enter the amount" required>
+                <input type="number" class="form-control" step="0.01" min="0" id="amount" name="total"
+                    th:field="*{total}" placeholder="Enter the amount" required>
                 <input type="hidden" id="type" class="form-select" name="type" th:field="*{type}"
                     th:attr="value='DEPOSIT'">
             </div>
             <button type="submit" class="btn btn-primary">Create Transaction</button>
+            <div th:if="${errors}" class="alert alert-danger" th:text="${errors}"></div>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

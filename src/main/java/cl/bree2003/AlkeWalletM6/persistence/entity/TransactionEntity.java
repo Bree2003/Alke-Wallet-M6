@@ -38,17 +38,4 @@ public class TransactionEntity {
     @JsonBackReference
     private UserEntity user;
 
-    @Override
-    public String toString() {
-        return "TransactionEntity{" +
-                "id=" + id +
-                ", message='" + message + '\'' +
-                ", type=" + type +
-                ", emailSender='" + emailSender + '\'' +
-                ", emailReceiver='" + emailReceiver + '\'' +
-                ", total=" + total +
-                ", createdAt=" + createdAt +
-                ", user=" + user +
-                '}';
-    }
 }

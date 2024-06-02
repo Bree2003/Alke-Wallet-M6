@@ -10,36 +10,41 @@
 <body>
     <div class="container">
         <h2>Transactions</h2>
-        <div th:if="${errors}" class="alert alert-danger" th:text="${errors}"></div>
         <a th:href="@{/api/transactions/deposit}" class="btn btn-primary">Deposit</a>
         <a th:href="@{/api/transactions/withdraw}" class="btn btn-primary">Withdraw</a>
         <a th:href="@{/api/transactions/transfer}" class="btn btn-primary">Transfer</a>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Message</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Sender</th>
-                    <th scope="col">Receiver</th>
-                    <th scope="col">Created At</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="transaction, iterStat : ${transactions}">
-                    <th scope="row" th:text="${iterStat.index + 1}"></th>
-                    <td th:text="${transaction.message}"></td>
-                    <td th:text="${transaction.type}"></td>
-                    <td th:text="'$' + ${transaction.total}"></td>
-                    <td th:text="${transaction.emailSender}"></td>
-                    <td th:text="${transaction.emailReceiver}"></td>
-                    <td
-                        th:text="${#strings.substring(transaction.createdAt, 0, 10) + ' ' + #strings.substring(transaction.createdAt, 11, 19)}">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div th:if="${#lists.isEmpty(transactions)}">
+            <p>You don't have any transactions, how about you create your first one.</p>
+        </div>
+        <div th:if="${!#lists.isEmpty(transactions)}">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Sender</th>
+                        <th scope="col">Receiver</th>
+                        <th scope="col">Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="transaction, iterStat : ${transactions}">
+                        <th scope="row" th:text="${iterStat.index + 1}"></th>
+                        <td th:text="${transaction.message}"></td>
+                        <td th:text="${transaction.type}"></td>
+                        <td th:text="'$' + ${transaction.total}"></td>
+                        <td th:text="${transaction.emailSender}"></td>
+                        <td th:text="${transaction.emailReceiver}"></td>
+                        <td
+                            th:text="${#strings.substring(transaction.createdAt, 0, 10) + ' ' + #strings.substring(transaction.createdAt, 11, 19)}">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <a th:href="@{/api/users/home}" class="btn btn-primary">Go to Home</a>
     </div>
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
