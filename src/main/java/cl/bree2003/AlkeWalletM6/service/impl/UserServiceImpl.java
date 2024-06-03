@@ -1,7 +1,7 @@
 package cl.bree2003.AlkeWalletM6.service;
 
-import cl.bree2003.AlkeWalletM6.entity.UserEntity;
-import cl.bree2003.AlkeWalletM6.repository.UserRepository;
+import cl.bree2003.AlkeWalletM6.persistence.entity.UserEntity;
+import cl.bree2003.AlkeWalletM6.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

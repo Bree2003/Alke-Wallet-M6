@@ -1,6 +1,6 @@
 package cl.bree2003.AlkeWalletM6.service;
 
-import cl.bree2003.AlkeWalletM6.entity.UserEntity;
+import cl.bree2003.AlkeWalletM6.persistence.entity.UserEntity;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
