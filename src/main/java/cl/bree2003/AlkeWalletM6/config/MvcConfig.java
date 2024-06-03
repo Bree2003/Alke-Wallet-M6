@@ -12,7 +12,7 @@ public class MvcConfig implements WebMvcConfigurer {
     private UserInterceptor userInterceptor;
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry){
+    public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(userInterceptor);
     }
 }
