@@ -1,6 +1,6 @@
 package cl.bree2003.AlkeWalletM6.config;
 
-import cl.bree2003.AlkeWalletM6.entity.UserEntity;
+import cl.bree2003.AlkeWalletM6.persistence.entity.UserEntity;
 import cl.bree2003.AlkeWalletM6.service.IUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,7 +22,7 @@ public class UserInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("user_session_id") != null) {
             Long userId = Long.parseLong(session.getAttribute("user_session_id").toString());
-            Optional<UserEntity> optionalUser = userService.getUserById(userId);
+            Optional<UserEntity> optionalUser = userService.findUserById(userId);
             if (optionalUser.isPresent()) {
                 request.setAttribute("user", optionalUser.get());
             } else {

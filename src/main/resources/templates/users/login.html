@@ -30,21 +30,22 @@
             <div class="col-md-6">
                 <div class="login-form">
                     <h2 class="text-center mb-4">Login</h2>
-                    <form th:action="@{/login}" method="post">
+                    <form th:action="@{/login}" th:object="${loginDTO}" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required
-                                autocomplete="off">
+                            <input type="text" class="form-control" id="username" name="username" th:field="*{username}"
+                                required autocomplete="off">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required
-                                autocomplete="off">
+                            <input type="password" class="form-control" id="password" name="password"
+                                th:field="*{password}" required autocomplete="off">
                         </div>
                         <div class="text-center mb-3">
                             <button type="submit" class="btn btn-dark">Login</button>
+                            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
                         </div>
-                        <p class="text-center">Don't have an account? <a th:href="@{/record}">Register</a></p>
+                        <p class="text-center">Don't have an account? <a th:href="@{/register}">Register</a></p>
                     </form>
                 </div>
             </div>

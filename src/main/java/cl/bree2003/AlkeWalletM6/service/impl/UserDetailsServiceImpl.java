@@ -1,6 +1,7 @@
-package cl.bree2003.AlkeWalletM6.service;
+package cl.bree2003.AlkeWalletM6.service.impl;
 
 import cl.bree2003.AlkeWalletM6.persistence.entity.UserEntity;
+import cl.bree2003.AlkeWalletM6.service.IUserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -22,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserEntity> optionalUser = userService.getUserByUsername(username);
+        Optional<UserEntity> optionalUser = userService.findUserByUsername(username);
         if(optionalUser.isPresent()) {
             session.setAttribute("user_session_id", optionalUser.get().getId());
             UserEntity userEntity = optionalUser.get();

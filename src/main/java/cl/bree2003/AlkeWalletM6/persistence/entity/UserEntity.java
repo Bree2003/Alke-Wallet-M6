@@ -1,5 +1,6 @@
-package cl.bree2003.AlkeWalletM6.entity;
+package cl.bree2003.AlkeWalletM6.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,13 +20,18 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String email;
+    @Column(unique = true)
     private String username;
+    @Column(unique = true)
+    private String email;
     private String password;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<PostEntity> posts = new ArrayList<>();
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<CommentEntity> comments = new ArrayList<>();
+    @Column(columnDefinition = "DECIMAL(10,2)")
+    private Double balance;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<ContactEntity> contacts = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<TransactionEntity> transactions = new ArrayList<>();
 
 }
