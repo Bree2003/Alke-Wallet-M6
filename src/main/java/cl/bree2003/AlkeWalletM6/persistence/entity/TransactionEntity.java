@@ -1,14 +1,17 @@
 package cl.bree2003.AlkeWalletM6.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Immutable;
 
 import java.time.LocalDateTime;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,11 +31,13 @@ public class TransactionEntity {
     private String emailReceiver;
     @Column(columnDefinition = "DECIMAL(10,2)")
     private Double total;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sender_id", nullable = false)
     @JsonBackReference
     private UserEntity user;
+
 
 }

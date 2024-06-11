@@ -22,4 +22,5 @@ public class ContactEntity {
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private UserEntity user;
+
 }
