@@ -2,15 +2,16 @@ package cl.bree2003.AlkeWalletM6.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -23,7 +24,7 @@ public class UserEntity {
     private String username;
     @Column(unique = true)
     private String email;
-    private String pass;
+    private String password;
     @Column(columnDefinition = "DECIMAL(10,2)")
     private Double balance;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

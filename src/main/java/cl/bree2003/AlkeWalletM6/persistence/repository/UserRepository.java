@@ -1,6 +1,5 @@
 package cl.bree2003.AlkeWalletM6.persistence.repository;
 
-
 import cl.bree2003.AlkeWalletM6.persistence.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +14,5 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Optional<UserEntity> findUserByUsername(String username);
     @Query("SELECT u FROM UserEntity u WHERE u.email = :email")
     Optional<UserEntity> findUserByEmail(String email);
+
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
-
 public class UserValidation {
 
     @Autowired
@@ -18,9 +17,14 @@ public class UserValidation {
 
         responseDTO.setNumOfErrors(0);
 
-        if(user.getName() == null || user.getName().length() < 3){
+        if(user.getName().length() < 3){
             responseDTO.setNumOfErrors(responseDTO.getNumOfErrors() + 1);
-            responseDTO.setMessage("Name can't be null, also it must contain more than 3 characters.");
+            responseDTO.setMessage("Name must contain more than 3 characters.");
+        }
+
+        if(user.getUsername().length() < 3){
+            responseDTO.setNumOfErrors(responseDTO.getNumOfErrors() + 1);
+            responseDTO.setMessage("Username must contain more than 3 characters.");
         }
 
         Optional<UserEntity> existingUsername = userService.findUserByUsername(user.getUsername());
@@ -40,7 +44,7 @@ public class UserValidation {
             responseDTO.setMessage("Email is not valid.");
         }
 
-        if(user.getPass() == null || !user.getPass() .matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,16}$")) {
+        if(user.getPassword() == null || !user.getPassword() .matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,16}$")) {
             responseDTO.setNumOfErrors(responseDTO.getNumOfErrors() + 1);
             responseDTO.setMessage("Password must contain between 8 and 16 characters, at least a number, a lower case and a capital letter.");
         }
