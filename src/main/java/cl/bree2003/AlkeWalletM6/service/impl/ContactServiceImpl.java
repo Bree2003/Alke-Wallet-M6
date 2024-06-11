@@ -13,13 +13,8 @@ import java.util.Optional;
 @Service
 public class ContactServiceImpl implements IContactService {
 
-    private final ContactRepository contactRepository;
-
     @Autowired
-    public ContactServiceImpl(ContactRepository contactRepository) {
-        this.contactRepository = contactRepository;
-    }
-
+    private ContactRepository contactRepository;
 
     @Override
     public void createContact(ContactEntity contact) {

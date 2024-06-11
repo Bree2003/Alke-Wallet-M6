@@ -1,6 +1,7 @@
 package cl.bree2003.AlkeWalletM6.controller;
 
 import cl.bree2003.AlkeWalletM6.persistence.entity.ContactEntity;
+import cl.bree2003.AlkeWalletM6.persistence.entity.UserEntity;
 import cl.bree2003.AlkeWalletM6.service.IContactService;
 import cl.bree2003.AlkeWalletM6.service.model.dto.ResponseDTO;
 import cl.bree2003.AlkeWalletM6.service.model.validation.ContactValidation;
@@ -30,11 +31,22 @@ public class ContactController {
     }
 
     @PostMapping("/create")
-    public String createContact(@ModelAttribute("contact") ContactEntity contact, Model model, HttpSession session){
+    public String createContact(@ModelAttribute("contact") ContactEntity contact, Model model, HttpSession session) {
         Long userId = (Long) session.getAttribute("user_session_id");
-        contact.setUser(contactService.findUserById(userId).get());
+        if (userId == null) {
+            // Manejar el caso de que no haya una sesión activa
+            return "redirect:/login";
+        }
+
+        Optional<UserEntity> optionalUser = contactService.findUserById(userId);
+        if (!optionalUser.isPresent()) {
+            // Manejar el caso de que el usuario no exista en la base de datos
+            return "redirect:/login";
+        }
+
+        contact.setUser(optionalUser.get());
         ResponseDTO validationResponse = contactValidation.validate(contact);
-        if(validationResponse.getNumOfErrors() > 0){
+        if (validationResponse.getNumOfErrors() > 0) {
             model.addAttribute("errors", validationResponse.getMessage());
             return "/alke/create-contact";
         }
@@ -42,6 +54,7 @@ public class ContactController {
         contactService.createContact(contact);
         return "redirect:/alke/contacts/all-your-contacts";
     }
+
 
     @GetMapping("/all-your-contacts")
     public String showAllContactsByUser(Model model, HttpSession session){
@@ -54,11 +67,15 @@ public class ContactController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteContact(@PathVariable Long id, HttpSession session){
+    public String deleteContact(@PathVariable Long id, HttpSession session) {
         Long userId = (Long) session.getAttribute("user_session_id");
-        Optional<ContactEntity> optionalContact = contactService.findContactById(id);
+        if (userId == null) {
+            // Manejar el caso de que no haya sesión activa
+            return "redirect:/login";
+        }
 
-        if(optionalContact.isPresent() & optionalContact.get().getUser().getId().equals(userId)){
+        Optional<ContactEntity> optionalContact = contactService.findContactById(id);
+        if (optionalContact.isPresent() && optionalContact.get().getUser().getId().equals(userId)) {
             contactService.deleteContactById(id);
         }
 

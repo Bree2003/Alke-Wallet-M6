@@ -14,12 +14,8 @@ import java.util.Optional;
 @Service
 public class TransactionServiceImpl implements ITransactionService {
 
-    private final TransactionRepository transactionRepository;
-
     @Autowired
-    public TransactionServiceImpl(TransactionRepository transactionRepository) {
-        this.transactionRepository = transactionRepository;
-    }
+    private  TransactionRepository transactionRepository;
 
     @Override
     @Transactional
